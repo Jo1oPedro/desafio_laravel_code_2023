@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained(
-                table: 'users'
-            )->onDelete(null);
+            $table->foreignId('user_id')
+                ->unique()
+                ->constrained(
+                    table: 'users'
+                )
+                ->onDelete(null);
             $table->enum('work_time', ['morning', 'afternoon', 'night']);
             $table->timestamps();
         });

@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('person_id')->constrained(
-                table: 'persons'
-            )->onDelete(null);
+
+            $table->foreignId('people_id')
+                ->unique()
+                ->constrained(
+                    table: 'persons'
+                )
+                ->onDelete(null);
+
             $table->enum('user_specialization', ['employees', 'admins']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

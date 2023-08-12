@@ -14,9 +14,14 @@ return new class extends Migration
         Schema::create('owners', function (Blueprint $table) {
             $table->id();
             $table->string('profile_picture_path')->nullable();
-            $table->foreignId('person_id')->constrained(
-                table: 'persons'
-            )->onDelete(null);
+
+            $table->foreignId('people_id')
+                ->unique()
+                ->constrained(
+                    table: 'persons'
+                )
+                ->onDelete(null);
+
             $table->timestamps();
         });
     }
