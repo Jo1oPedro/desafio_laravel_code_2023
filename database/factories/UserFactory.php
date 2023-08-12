@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\People;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -17,9 +19,13 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $user_specialization = fake()->randomElement(
+            User::USER_SPECIALIZATION
+        );
+
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'person_id' => People::inRandomOrder()->first()->id,
+            'user_specialization' => $user_specialization,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
