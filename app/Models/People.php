@@ -39,4 +39,14 @@ class People extends Model
     {
         return $this->hasMany(Owner::class);
     }
+
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
+
+    public function phone_number()
+    {
+        return $this->belongsTo(PhoneNumber::class);
+    }
 }
