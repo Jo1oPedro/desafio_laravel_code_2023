@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Owner;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\People;
 
@@ -10,6 +12,8 @@ use App\Models\People;
  */
 class OwnerFactory extends Factory
 {
+    static $ids_utilizados = [];
+
     /**
      * Define the model's default state.
      *
@@ -17,8 +21,17 @@ class OwnerFactory extends Factory
      */
     public function definition(): array
     {
+        $availablePeopleIds = People::whereNotIn(
+            'id',
+            array_merge(self::$ids_utilizados, User::pluck('people_id')->toArray())
+        )->pluck('id');
+
+        $id = fake()->randomElement($availablePeopleIds);
+
+        self::$ids_utilizados[] = $id;
+
         return [
-            'person_id' => People::inRandomOrder()->first()->id
+            'people_id' => $id
         ];
     }
 }

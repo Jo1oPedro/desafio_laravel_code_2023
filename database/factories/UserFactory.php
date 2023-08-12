@@ -12,6 +12,8 @@ use Illuminate\Support\Str;
  */
 class UserFactory extends Factory
 {
+    static $ids_utilizados = [];
+
     /**
      * Define the model's default state.
      *
@@ -23,8 +25,17 @@ class UserFactory extends Factory
             User::USER_SPECIALIZATION
         );
 
+        $availablePeopleIds = People::whereNotIn(
+            'id',
+            self::$ids_utilizados
+        )->pluck('id');
+
+        $id = fake()->randomElement($availablePeopleIds);
+
+        self::$ids_utilizados[] = $id;
+
         return [
-            'person_id' => People::inRandomOrder()->first()->id,
+            'people_id' => $id,
             'user_specialization' => $user_specialization,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

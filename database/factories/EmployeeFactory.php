@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class EmployeeFactory extends Factory
 {
+    static $ids_utilizados = [];
+
     /**
      * Define the model's default state.
      *
@@ -22,8 +24,17 @@ class EmployeeFactory extends Factory
             Employee::WORK_TIMES
         );
 
+        $availableUserIds = User::whereNotIn(
+            'id',
+            self::$ids_utilizados
+        )->pluck('id');
+
+        $id = fake()->randomElement($availableUserIds);
+
+        self::$ids_utilizados[] = $id;
+
         return [
-            'user_id' => User::inRandomOrder()->first()->id,
+            'user_id' => $id,
             'work_time' => $work_time
         ];
     }

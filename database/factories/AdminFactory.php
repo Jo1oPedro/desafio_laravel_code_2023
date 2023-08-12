@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -10,6 +11,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class AdminFactory extends Factory
 {
+    static $ids_utilizados = [];
+
     /**
      * Define the model's default state.
      *
@@ -17,8 +20,17 @@ class AdminFactory extends Factory
      */
     public function definition(): array
     {
+        $availableUserIds = User::whereNotIn(
+            'id',
+            self::$ids_utilizados
+        )->pluck('id');
+
+        $id = fake()->randomElement($availableUserIds);
+
+        self::$ids_utilizados[] = $id;
+
         return [
-            'user_id' => User::inRandomOrder()->first()->id
+            'user_id' => $id
         ];
     }
 }
