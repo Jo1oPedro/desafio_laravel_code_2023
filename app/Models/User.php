@@ -3,7 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\traits\SpecializedPeopleTrait;
+use App\traits\SpecializedPersonTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -14,7 +14,7 @@ class User extends Authenticatable
     use HasApiTokens,
         HasFactory,
         Notifiable,
-        SpecializedPeopleTrait;
+        SpecializedPersonTrait;
 
     /**
      * @var array<string, string>
@@ -53,6 +53,6 @@ class User extends Authenticatable
 
     public function people()
     {
-        return $this->belongsTo(People::class);
+        return $this->belongsTo(Person::class);
     }
 }

@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use App\traits\SpecializedPeopleTrait;
+use App\traits\SpecializedPersonTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Owner extends Model
 {
     use HasFactory,
-    SpecializedPeopleTrait;
+    SpecializedPersonTrait;
     protected $fillable = [
         'person_id',
         'profile_picture'
@@ -17,7 +17,7 @@ class Owner extends Model
 
     public function people()
     {
-        return $this->belongsTo(People::class);
+        return $this->belongsTo(Person::class);
     }
 
     public function pets()

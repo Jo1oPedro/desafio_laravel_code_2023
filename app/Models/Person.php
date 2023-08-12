@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class People extends Model
+class Person extends Model
 {
     use HasFactory;
 
     const PERSON_SPECIALIZATIONS = ['users', 'owners'];
 
-    protected $table = 'persons';
+    //protected $table = 'persons';
     /**
      * The attributes that are mass assignable.
      *

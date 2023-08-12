@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\People;
+use App\Models\Person;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -25,7 +25,7 @@ class UserFactory extends Factory
             User::USER_SPECIALIZATION
         );
 
-        $availablePeopleIds = People::whereNotIn(
+        $availablePeopleIds = Person::whereNotIn(
             'id',
             self::$ids_utilizados
         )->pluck('id');

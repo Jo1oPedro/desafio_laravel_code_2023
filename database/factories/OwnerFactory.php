@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Models\Owner;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\People;
+use App\Models\Person;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Owner>
@@ -21,7 +21,7 @@ class OwnerFactory extends Factory
      */
     public function definition(): array
     {
-        $availablePeopleIds = People::whereNotIn(
+        $availablePeopleIds = Person::whereNotIn(
             'id',
             array_merge(self::$ids_utilizados, User::pluck('people_id')->toArray())
         )->pluck('id');

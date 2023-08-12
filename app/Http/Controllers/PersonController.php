@@ -2,28 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\People;
+use App\Http\Resources\Person\PersonCollection;
+use App\Models\Person;
 use Illuminate\Http\Request;
 
-class PeopleController extends Controller
+class PersonController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return response()->json(
+        return new PersonCollection(Person::all());
+        exit();
+        /*
             [
-                'persons' => People::with(
-                    [
-                        'users.admins',
-                        'users.employees',
-                        'owners'
-                    ]
-                )
+                'users.admins',
+                'users.employees',
+                'owners'
             ]
-        );
-
+         */
     }
 
     /**
@@ -37,7 +35,7 @@ class PeopleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(People $people)
+    public function show(Person $people)
     {
         //
     }
@@ -45,7 +43,7 @@ class PeopleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, People $people)
+    public function update(Request $request, Person $people)
     {
         //
     }
@@ -53,7 +51,7 @@ class PeopleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(People $people)
+    public function destroy(Person $people)
     {
         //
     }

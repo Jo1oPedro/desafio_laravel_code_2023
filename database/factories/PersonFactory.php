@@ -3,14 +3,14 @@
 namespace Database\Factories;
 
 use App\Models\Address;
-use App\Models\People;
+use App\Models\Person;
 use App\Models\PhoneNumber;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class PeopleFactory extends Factory
+class PersonFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,7 +20,7 @@ class PeopleFactory extends Factory
     public function definition(): array
     {
         $person_specialization = fake()->randomElement(
-            People::PERSON_SPECIALIZATIONS
+            Person::PERSON_SPECIALIZATIONS
         );
 
         return [

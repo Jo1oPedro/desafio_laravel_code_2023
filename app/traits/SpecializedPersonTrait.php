@@ -2,7 +2,7 @@
 
 namespace App\traits;
 
-trait SpecializedPeopleTrait
+trait SpecializedPersonTrait
 {
     public function scopeWherePeopleId($query, $specialization)
     {

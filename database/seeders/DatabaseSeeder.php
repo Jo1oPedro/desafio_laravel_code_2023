@@ -6,7 +6,7 @@ namespace Database\Seeders;
 use App\Models\Address;
 use App\Models\Employee;
 use App\Models\Owner;
-use App\Models\People;
+use App\Models\Person;
 use App\Models\Pet;
 use App\Models\PhoneNumber;
 use App\Models\User;
@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
     {
         Address::factory(20)->create();
         PhoneNumber::factory(20)->create();
-        People::factory(30)->create();
+        Person::factory(30)->create();
         User::factory(20)->create();
         Employee::factory(10)->create();
         Pet::factory(20)->create();

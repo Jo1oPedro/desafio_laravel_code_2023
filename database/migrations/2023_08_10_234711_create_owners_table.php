@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('people_id')
                 ->unique()
                 ->constrained(
-                    table: 'persons'
+                    table: 'people'
                 )
                 ->onDelete(null);
 
