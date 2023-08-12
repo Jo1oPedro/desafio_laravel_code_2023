@@ -22,11 +22,11 @@ class DatabaseSeeder extends Seeder
     {
         Address::factory(20)->create();
         PhoneNumber::factory(20)->create();
-        People::factory(20)->create();
+        People::factory(30)->create();
         User::factory(20)->create();
-        Employee::factory(20)->create();
+        Employee::factory(10)->create();
         Pet::factory(20)->create();
-        Owner::factory(20)->create();
+        Owner::factory(10)->create();
         $this->createPetUserRegister();
         $this->createPetOwnerRegister();
         // \App\Models\User::factory(10)->create();
