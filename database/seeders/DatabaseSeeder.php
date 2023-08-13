@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Address;
+use App\Models\Admin;
 use App\Models\Employee;
 use App\Models\Owner;
 use App\Models\Person;
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
         Employee::factory(10)->create();
         Pet::factory(20)->create();
         Owner::factory(10)->create();
+        Admin::factory(10)->create();
         $this->createPetUserRegister();
         $this->createPetOwnerRegister();
         // \App\Models\User::factory(10)->create();

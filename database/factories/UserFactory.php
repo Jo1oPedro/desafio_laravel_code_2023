@@ -13,6 +13,8 @@ use Illuminate\Support\Str;
 class UserFactory extends Factory
 {
     static $ids_utilizados = [];
+    static $number_of_admins = 0;
+    static $number_of_employees = 0;
 
     /**
      * Define the model's default state.
@@ -21,14 +23,9 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $user_specialization = fake()->randomElement(
-            User::USER_SPECIALIZATION
-        );
+        $user_specialization = $this->get_user_specialization();
 
-        $availablePeopleIds = Person::whereNotIn(
-            'id',
-            self::$ids_utilizados
-        )->pluck('id');
+        $availablePeopleIds = $this->get_available_people_ids();
 
         $id = fake()->randomElement($availablePeopleIds);
 
@@ -51,5 +48,34 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    private function get_user_specialization()
+    {
+        $user_specialization = fake()->randomElement(
+            User::USER_SPECIALIZATION
+        );
+
+        if($user_specialization == 'employees') {
+            if(++self::$number_of_employees > 10) {
+                $user_specialization = 'admins';
+            }
+        }
+
+        if($user_specialization == 'admins') {
+            if(++self::$number_of_admins > 10) {
+                $user_specialization = 'employees';
+            }
+        }
+
+        return $user_specialization;
+    }
+
+    private function get_available_people_ids()
+    {
+        return Person::whereNotIn(
+            'id',
+            self::$ids_utilizados
+        )->pluck('id');
     }
 }

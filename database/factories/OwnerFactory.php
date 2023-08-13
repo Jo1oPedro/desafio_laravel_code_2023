@@ -21,10 +21,7 @@ class OwnerFactory extends Factory
      */
     public function definition(): array
     {
-        $availablePeopleIds = Person::whereNotIn(
-            'id',
-            array_merge(self::$ids_utilizados, User::pluck('people_id')->toArray())
-        )->pluck('id');
+        $availablePeopleIds = $this->get_available_people_ids();
 
         $id = fake()->randomElement($availablePeopleIds);
 
@@ -33,5 +30,13 @@ class OwnerFactory extends Factory
         return [
             'people_id' => $id
         ];
+    }
+
+    private function get_available_people_ids()
+    {
+        return Person::whereNotIn(
+            'id',
+            array_merge(self::$ids_utilizados, User::pluck('people_id')->toArray())
+        )->pluck('id');
     }
 }

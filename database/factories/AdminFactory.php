@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Admin;
+use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,10 +21,7 @@ class AdminFactory extends Factory
      */
     public function definition(): array
     {
-        $availableUserIds = User::whereNotIn(
-            'id',
-            self::$ids_utilizados
-        )->pluck('id');
+        $availableUserIds = $this->get_available_user_ids();
 
         $id = fake()->randomElement($availableUserIds);
 
@@ -32,5 +30,13 @@ class AdminFactory extends Factory
         return [
             'user_id' => $id
         ];
+    }
+
+    private function get_available_user_ids()
+    {
+        return User::whereNotIn(
+            'id',
+            array_merge(self::$ids_utilizados, Employee::pluck('user_id')->toArray())
+        )->pluck('id');
     }
 }

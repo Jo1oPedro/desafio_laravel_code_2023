@@ -19,9 +19,7 @@ class PersonFactory extends Factory
      */
     public function definition(): array
     {
-        $person_specialization = fake()->randomElement(
-            Person::PERSON_SPECIALIZATIONS
-        );
+        $person_specialization = $this->get_person_specialization();
 
         return [
             'name' => fake()->name,
@@ -31,5 +29,12 @@ class PersonFactory extends Factory
             'address_id' => Address::inRandomOrder()->first()->id,
             'phone_number_id' => PhoneNumber::inRandomOrder()->first()->id
         ];
+    }
+
+    private function get_person_specialization()
+    {
+        return fake()->randomElement(
+            Person::PERSON_SPECIALIZATIONS
+        );
     }
 }

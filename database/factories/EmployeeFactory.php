@@ -20,14 +20,9 @@ class EmployeeFactory extends Factory
      */
     public function definition(): array
     {
-        $work_time = fake()->randomElement(
-            Employee::WORK_TIMES
-        );
+        $work_time = $this->get_work_time();
 
-        $availableUserIds = User::whereNotIn(
-            'id',
-            self::$ids_utilizados
-        )->pluck('id');
+        $availableUserIds = $this->get_available_user_ids();
 
         $id = fake()->randomElement($availableUserIds);
 
@@ -37,5 +32,20 @@ class EmployeeFactory extends Factory
             'user_id' => $id,
             'work_time' => $work_time
         ];
+    }
+
+    private function get_work_time()
+    {
+        return fake()->randomElement(
+            Employee::WORK_TIMES
+        );
+    }
+
+    private function get_available_user_ids()
+    {
+        return User::whereNotIn(
+            'id',
+            self::$ids_utilizados
+        )->where('user_specialization', 'employees')->pluck('id');
     }
 }
