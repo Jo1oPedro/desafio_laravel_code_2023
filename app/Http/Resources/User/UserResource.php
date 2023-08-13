@@ -10,6 +10,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
 {
+    private $data_resource = [];
+
     /**
      * Transform the resource into an array.
      *
@@ -17,32 +19,44 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $data = [
+        $this->data_resource = [
             'id' => $this->id,
             'user_specialization' => $this->user_specialization
         ];
 
+        $this->get_people_loaded_relations();
+
+        $this->get_admins_loaded_relations();
+
+        $this->get_employees_loaded_relations();
+
+        return $this->data_resource;
+    }
+
+    private function get_people_loaded_relations()
+    {
         if($this->relationLoaded('people')) {
             if($this->people) {
-                $person_resource = new PersonResource($this->people->first());
-                $data['people'] = $person_resource;
+                $this->data_resource['people'] = new PersonResource($this->people->first());
             }
         }
+    }
 
+    private function get_admins_loaded_relations()
+    {
         if($this->relationLoaded('admins')) {
             if($this->admins->isNotEmpty()) {
-                $admin_resource = new AdminResource($this->admins->first());
-                $data['admin'] =  $admin_resource;
+                $this->data_resource['admin'] =  new AdminResource($this->admins->first());
             }
         }
+    }
 
+    private function get_employees_loaded_relations()
+    {
         if($this->relationLoaded('employees')) {
             if($this->employees->isNotEmpty()) {
-                $employee_resource = new EmployeeResource($this->employees->first());
-                $data['admin'] =  $employee_resource;
+                $this->data_resource['employee'] =  new EmployeeResource($this->employees->first());
             }
         }
-
-        return $data;
     }
 }
