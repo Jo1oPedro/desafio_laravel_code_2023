@@ -4,13 +4,12 @@ namespace App\Http\Resources\Person;
 
 use App\Http\Resources\Owner\OwnerResource;
 use App\Http\Resources\User\UserResource;
-use App\Models\Owner;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PersonResource extends JsonResource
 {
+    private array $data_resource = [];
     /**
      * Transform the resource into an array.
      *
@@ -18,47 +17,52 @@ class PersonResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        //$user = User::WherePeopleId($this->id)->first();
-        //$owner = Owner::WherePeopleId($this->id)->first();
-
-        $data = [
+        $this->data_resource = [
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
             'birthdate' => $this->birthdate,
-            /*'user' => $this->when($this->relationLoaded('users'), function () {
-                return $this->users->isNotEmpty() ? new UserResource($this->users->first()) : null;
-            }),
-            'owner' => $this->whenNotNull($this->owners)*/
         ];
 
+        $this->get_users_loaded_relations();
+
+        $this->get_owners_loaded_relations();
+
+        return $this->data_resource;
+    }
+
+    private function get_users_loaded_relations()
+    {
         if($this->relationLoaded('users')) {
             if($this->users?->isNotEmpty()) {
-                //$user_resource = new UserResource($this->users->first()?->load('people'));
-                $user_resource = new UserResource($this->users->first()->load('admins'));
-                $data['user'] = $user_resource;
+                $this->data_resource['user'] = new UserResource(
+                    $this->users->first()->load($this->get_users_loaded_specif_relations())
+                );
             }
         }
+    }
 
+    private function get_users_loaded_specif_relations()
+    {
+        $specif_relations = [];
+
+        if($this->relationLoaded('employee')) {
+            $specif_relations[] = 'employee';
+        }
+
+        if($this->relationLoaded('admins')) {
+            $specif_relations[] = 'admins';
+        }
+
+        return $specif_relations;
+    }
+
+    private function get_owners_loaded_relations()
+    {
         if($this->relationLoaded('owners')) {
             if($this->owners?->isNotEmpty()) {
-                $owner_resource = new OwnerResource($this->owners->first());
-                $data['owner'] = $owner_resource;
+                $this->data_resource['owner'] = new OwnerResource($this->owners->first());
             }
         }
-
-        return $data;
-
-        /*if($user = User::WherePeopleId($this->id)->first()) {
-            return array_merge($common_data, [
-                'user' => new UserResource($user)
-            ]);
-        }
-
-        if($owner = Owner::WherePeopleId($this->id)->first()) {
-            return array_merge($common_data, [
-                'owner' => new OwnerResource($owner)
-            ]);
-        }*/
     }
 }
