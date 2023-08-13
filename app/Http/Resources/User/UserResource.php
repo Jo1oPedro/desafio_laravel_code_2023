@@ -3,6 +3,7 @@
 namespace App\Http\Resources\User;
 
 use App\Http\Resources\Admin\AdminResource;
+use App\Http\Resources\Employee\EmployeeResource;
 use App\Http\Resources\Person\PersonResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -32,6 +33,13 @@ class UserResource extends JsonResource
             if($this->admins->isNotEmpty()) {
                 $admin_resource = new AdminResource($this->admins->first());
                 $data['admin'] =  $admin_resource;
+            }
+        }
+
+        if($this->relationLoaded('employees')) {
+            if($this->employees->isNotEmpty()) {
+                $employee_resource = new EmployeeResource($this->employees->first());
+                $data['admin'] =  $employee_resource;
             }
         }
 
