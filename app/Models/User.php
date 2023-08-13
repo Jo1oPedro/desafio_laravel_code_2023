@@ -65,4 +65,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Employee::class);
     }
+
+    public function scopeWhereEmail($query, $email)
+    {
+        return $query->where(
+            'id',
+            Person::where('email', $email)
+                ->first()
+                ->id
+        );
+    }
 }
