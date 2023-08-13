@@ -55,4 +55,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Person::class);
     }
+
+    public function admins()
+    {
+        return $this->hasMany(Admin::class);
+    }
+
+    public function employees()
+    {
+        return $this->hasMany(Employee::class);
+    }
 }
