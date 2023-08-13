@@ -21,4 +21,9 @@ class Employee extends Model
         return $this->belongsToMany(Pet::class, 'pet_user')
             ->withPivot(['value', 'work_done', 'finished_at']);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
