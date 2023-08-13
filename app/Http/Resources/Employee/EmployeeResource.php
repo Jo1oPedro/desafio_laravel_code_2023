@@ -14,6 +14,10 @@ class EmployeeResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'user_id' => $this->whenNotNull($this->user_id),
+            'work_time' => $this->work_time
+        ];
     }
 }

@@ -25,6 +25,6 @@ Route::post('/login', [LoginController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/logout', [LoginController::class, 'logout']);
-    Route::resource('person', PersonController::class);
-    Route::resource('user', UserController::class);
+    Route::resource('people', PersonController::class);
+    Route::resource('users', UserController::class);
 });

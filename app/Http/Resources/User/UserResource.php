@@ -37,7 +37,10 @@ class UserResource extends JsonResource
     {
         if($this->relationLoaded('people')) {
             if($this->people) {
-                $this->data_resource['people'] = new PersonResource($this->people->first());
+                $person = $this->people->first();
+                $person->id = null;
+                //$person->user_specialization = null;
+                $this->data_resource['people'] = new PersonResource($person);
             }
         }
     }
@@ -46,7 +49,9 @@ class UserResource extends JsonResource
     {
         if($this->relationLoaded('admins')) {
             if($this->admins->isNotEmpty()) {
-                $this->data_resource['admin'] =  new AdminResource($this->admins->first());
+                $admin = $this->admins->first();
+                $admin->user_id = null;
+                $this->data_resource['admin'] =  new AdminResource($admin);
             }
         }
     }
@@ -55,7 +60,9 @@ class UserResource extends JsonResource
     {
         if($this->relationLoaded('employees')) {
             if($this->employees->isNotEmpty()) {
-                $this->data_resource['employee'] =  new EmployeeResource($this->employees->first());
+                $employee = $this->employees->first();
+                $employee->user_id = null;
+                $this->data_resource['employee'] =  new EmployeeResource($employee);
             }
         }
     }

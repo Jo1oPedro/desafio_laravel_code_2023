@@ -13,7 +13,15 @@ class PersonController extends Controller
      */
     public function index()
     {
-        return new PersonCollection(Person::with(['users.admins', 'owners'])->get());
+        return new PersonCollection(
+            Person::with(
+                [
+                    'users.admins',
+                    'users.employees',
+                    'owners'
+                ]
+            )->get()
+        );
     }
 
     /**
@@ -21,7 +29,7 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**

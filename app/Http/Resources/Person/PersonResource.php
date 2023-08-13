@@ -18,10 +18,11 @@ class PersonResource extends JsonResource
     public function toArray(Request $request): array
     {
         $this->data_resource = [
-            'id' => $this->id,
+            'id' => $this->whenNotNull($this->id),
             'name' => $this->name,
             'email' => $this->email,
             'birthdate' => $this->birthdate,
+            'person_specialization' => $this->whenNotNull($this->person_specialization)
         ];
 
         $this->get_users_loaded_relations();
