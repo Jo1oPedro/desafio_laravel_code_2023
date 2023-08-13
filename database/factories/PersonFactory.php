@@ -12,6 +12,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PersonFactory extends Factory
 {
+    private static $number_of_users = 0;
+    private static $number_of_owners = 0;
+
     /**
      * Define the model's default state.
      *
@@ -33,8 +36,22 @@ class PersonFactory extends Factory
 
     private function get_person_specialization()
     {
-        return fake()->randomElement(
+        $person_specialization = fake()->randomElement(
             Person::PERSON_SPECIALIZATIONS
         );
+
+        if($person_specialization == 'users') {
+            if(++self::$number_of_users > 20) {
+                $person_specialization = 'owners';
+            }
+        }
+
+        if($person_specialization == 'owners') {
+            if(++self::$number_of_owners > 10) {
+                $person_specialization = 'users';
+            }
+        }
+
+        return $person_specialization;
     }
 }

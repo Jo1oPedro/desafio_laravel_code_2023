@@ -76,6 +76,6 @@ class UserFactory extends Factory
         return Person::whereNotIn(
             'id',
             self::$ids_utilizados
-        )->pluck('id');
+        )->where('person_specialization', 'users')->pluck('id');
     }
 }
