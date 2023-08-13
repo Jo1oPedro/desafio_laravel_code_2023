@@ -37,9 +37,12 @@ class UserResource extends JsonResource
     {
         if($this->relationLoaded('people')) {
             if($this->people) {
-                $person = $this->people->first();
+                $person = $this
+                    ->people
+                    ->where('id', $this->people_id)
+                    ->first();
                 $person->id = null;
-                //$person->user_specialization = null;
+                $person->person_specialization = null;
                 $this->data_resource['people'] = new PersonResource($person);
             }
         }

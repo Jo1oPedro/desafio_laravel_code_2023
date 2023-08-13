@@ -72,7 +72,7 @@ class User extends Authenticatable
             'id',
             Person::where('email', $email)
                 ->first()
-                ->id
+                ?->id
         );
     }
 }
