@@ -75,4 +75,14 @@ class User extends Authenticatable
                 ?->id
         );
     }
+
+    public function scopeWherePersonIsUser($query)
+    {
+        return $query->where(
+            'id',
+            Person::where('person_specialization', 'users')
+                ->first()
+                ?->id
+        );
+    }
 }

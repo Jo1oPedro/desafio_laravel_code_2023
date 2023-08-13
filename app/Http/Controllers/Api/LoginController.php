@@ -15,12 +15,12 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
-        $user = User::whereEmail($request->email)->first();
+        $user = User::whereEmail($request->email)
+            ->wherePersonIsUser()
+            ?->first();
 
         if(!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
-            ]);
+            return response()->json('As credenciais enviadas estão incorretas.', 401);
         }
 
         $token = $user->createToken($request->device_name);
