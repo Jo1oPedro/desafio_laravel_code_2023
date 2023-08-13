@@ -13,15 +13,7 @@ class PersonController extends Controller
      */
     public function index()
     {
-        return new PersonCollection(Person::all());
-        exit();
-        /*
-            [
-                'users.admins',
-                'users.employees',
-                'owners'
-            ]
-         */
+        return new PersonCollection(Person::with(['users.admins', 'owners'])->get());
     }
 
     /**
