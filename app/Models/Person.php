@@ -32,12 +32,18 @@ class Person extends Model
 
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(
+            User::class,
+            'people_id'
+        );
     }
 
     public function owners()
     {
-        return $this->hasMany(Owner::class);
+        return $this->hasMany(
+            Owner::class,
+            'people_id'
+        );
     }
 
     public function address()
