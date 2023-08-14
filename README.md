@@ -24,25 +24,31 @@ Para executar o projeto você deve seguir os seguintes passos:
 - execute o comando: ```php artisan migrate --seed```
 - execute o comando: ```npm install```
 - execute o comando: ```npm run build```
+- Para gerar a documentação do swagger execute o comando: ```php artisan swagger```
 
 ## Links importantes da documentação para esse projeto
 
 ### Resources
 Link: <a href="https://laravel.com/docs/10.x/eloquent-resources">
-    Resources utilizados em conjunto com a model para manipular retorno em formato json as chamadas da api
+    Resources utilizados em conjunto com a model para manipular retorno em formato json as chamadas da api.
 </a>
 
 ### Authentication
 Link: <a href="https://laravel.com/docs/10.x/sanctum#api-token-authentication">
-    Autenticação para api utilizando token no sanctum
+    Autenticação para api utilizando token no sanctum.
 </a>
 
 Link: <a href="https://ww w.youtube.com/watch?v=_POq4dyp0WM">
-    Autenticação para api utilizando token no sanctum(video)
+    Autenticação para api utilizando token no sanctum(video).
 </a>
 
 ### DTO 
 Link: <a href="https://medium.com/@eloufirhatim/what-is-dto-and-how-to-use-it-in-a-laravel-application-7ca1e9045985#:~:text=DTO%20stands%20for%20Data%20Transfer,different%20parts%20of%20the%20application.">
     O que é um DTO e como começar a implementar utilizando um.
+</a>
+
+### Swagger para php
+Link: <a href="https://www.youtube.com/watch?v=rJ_GR3Y8-ck">
+    Como documentar uma api em php utilizando o php-swagger.
 </a>
 
