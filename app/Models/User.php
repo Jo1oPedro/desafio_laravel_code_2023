@@ -28,7 +28,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'user_specialization',
-        'person_id',
+        'people_id',
         'password',
     ];
 
@@ -69,7 +69,7 @@ class User extends Authenticatable
     public function scopeWhereEmail($query, $email)
     {
         return $query->where(
-            'id',
+            'people_id',
             Person::where('email', $email)
                 ->first()
                 ?->id
@@ -78,11 +78,10 @@ class User extends Authenticatable
 
     public function scopeWherePersonIsUser($query)
     {
-        return $query->where(
-            'id',
+        return $query->whereIn(
+            'people_id',
             Person::where('person_specialization', 'users')
-                ->first()
-                ?->id
+                ->pluck('id')
         );
     }
 }
