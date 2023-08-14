@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\DTO\AddressDTO;
 use App\DTO\EmployeeDTO;
+use App\DTO\PhoneNumberDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EmployeeStoreFormRequest;
 use App\Http\Resources\Employee\EmployeeCollection;
@@ -10,13 +12,17 @@ use App\Http\Resources\Employee\EmployeeResource;
 use App\Models\Address;
 use App\Models\Employee;
 use App\Models\PhoneNumber;
+use App\Services\AddressService;
 use App\Services\EmployeeService;
+use App\Services\PhoneNumberService;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
     public function __construct(
-        private EmployeeService $employeeService
+        private EmployeeService $employeeService,
+        private AddressService $addressService,
+        private PhoneNumberService $phoneNumberService
     ) {}
 
     /**
@@ -35,16 +41,30 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeStoreFormRequest $request)
     {
-        $address = Address::find(1)->first();
-        $phone_number = PhoneNumber::find(1)->first();
+        $address_id = $this->addressService->create(
+            new AddressDTO(
+                $request->neighborhood,
+                $request->street,
+                $request->zip_code,
+                $request->number
+            )
+        )->id;
+
+        $phone_number_id = $this->phoneNumberService->create(
+            new PhoneNumberDTO(
+                $request->country,
+                $request->ddd,
+                $request->phone_number
+            )
+        )->id;
 
         $employeDTO = new EmployeeDTO(
             $request->name,
             $request->email,
             $request->password,
             $request->birthdate,
-            $address->id,
-            $phone_number->id
+            $address_id,
+            $phone_number_id
         );
 
         return ['employee' => new EmployeeResource(
