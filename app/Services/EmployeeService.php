@@ -2,17 +2,18 @@
 
 namespace App\Services;
 
+use App\DTO\DTO;
 use App\DTO\EmployeeDTO;
 use App\DTO\UserDTO;
 use App\Models\Employee;
 
-class EmployeeService
+class EmployeeService implements iService
 {
     public function __construct(
         private UserService $userService
     ) {}
 
-    public function create(EmployeeDTO $employeeDTO)
+    public function create(DTO $employeeDTO)
     {
         $userDTO = new UserDTO(
             $employeeDTO->name,

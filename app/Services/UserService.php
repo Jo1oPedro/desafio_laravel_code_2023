@@ -2,18 +2,19 @@
 
 namespace App\Services;
 
+use App\DTO\DTO;
 use App\DTO\PersonDTO;
 use App\DTO\UserDTO;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class UserService
+class UserService implements iService
 {
     public function __construct(
         private PersonService $personService
     ) {}
 
-    public function create(UserDTO $userDTO)
+    public function create(DTO $userDTO)
     {
         $personDTO = new PersonDTO(
             $userDTO->name,

@@ -2,12 +2,13 @@
 
 namespace App\Services;
 
+use App\DTO\DTO;
 use App\DTO\PersonDTO;
 use App\Models\Person;
 
-class PersonService
+class PersonService implements iService
 {
-    public function create(PersonDTO $personDTO)
+    public function create(DTO $personDTO)
     {
         return Person::create($personDTO->toArray());
     }
