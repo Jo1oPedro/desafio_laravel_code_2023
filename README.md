@@ -25,7 +25,7 @@ Para executar o projeto você deve seguir os seguintes passos:
 - execute o comando: ```npm install```
 - execute o comando: ```npm run build```
 - Para gerar a documentação do swagger execute o comando: ```php artisan swagger```
-
+- Para acessar a documentação gerada pelo swagger acesse a url exibida pelo comando ```php artisan serv``` e adicione ```/api-documentation```
 ## Links importantes da documentação para esse projeto
 
 ### Resources
@@ -51,4 +51,3 @@ Link: <a href="https://medium.com/@eloufirhatim/what-is-dto-and-how-to-use-it-in
 Link: <a href="https://www.youtube.com/watch?v=rJ_GR3Y8-ck">
     Como documentar uma api em php utilizando o php-swagger.
 </a>
-
