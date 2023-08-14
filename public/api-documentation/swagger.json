@@ -1,0 +1,145 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Desafio Laravel Code 2023.2",
+        "contact": {
+            "email": "joao.pedreira@estudante.ufjf.br"
+        },
+        "version": "1.5.0"
+    },
+    "paths": {
+        "/api/employees": {
+            "post": {
+                "tags": [
+                    "Employee"
+                ],
+                "summary": "Create a new employee",
+                "description": "This endpoint creates a new employee",
+                "operationId": "781d9d682a574c5e2c1dab17f782b5cd",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation",
+                                    "birthdate",
+                                    "neighborhood",
+                                    "street",
+                                    "zip_code",
+                                    "number",
+                                    "country",
+                                    "ddd",
+                                    "phone_number"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Gabriel Nunes"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "gabriel_nunes@example.org"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "#sdasd$ssdaAA@"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "example": "#sdasd$ssdaAA@"
+                                    },
+                                    "birthdate": {
+                                        "type": "string",
+                                        "example": "1995-08-15"
+                                    },
+                                    "neighborhood": {
+                                        "type": "string",
+                                        "example": "Centro"
+                                    },
+                                    "street": {
+                                        "type": "string",
+                                        "example": "Rua do passarinho"
+                                    },
+                                    "zip_code": {
+                                        "type": "string",
+                                        "example": "37894457"
+                                    },
+                                    "number": {
+                                        "type": "string",
+                                        "example": "247"
+                                    },
+                                    "country": {
+                                        "type": "string",
+                                        "example": "55"
+                                    },
+                                    "ddd": {
+                                        "type": "string",
+                                        "example": "47"
+                                    },
+                                    "phone_number": {
+                                        "type": "string",
+                                        "example": "77849874"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Employee created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Employee": {
+                                            "type": "string",
+                                            "example": "['id': 21,'user_id': 32,'work_time': null]"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Incorrect fields",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The email has already been taken"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "..."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerToken": {
+                "type": "http",
+                "description": "Acess token obtido na autenticação",
+                "name": "Authorization",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

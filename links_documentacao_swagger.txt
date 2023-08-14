@@ -1,0 +1,4 @@
+Como Criar Rest API - Documentação com OpenApi/Swagger: https://www.youtube.com/watch?v=6NQYHMHKluA
+Laravel 9 - Api Sanctum + documentação Swagger Php [Parte 1]: https://www.youtube.com/watch?v=_POq4dyp0WM
+Swagger documentation for php api | Complete crud documentation using swagger [Super easy] 2022: https://www.youtube.com/watch?v=J6ZKwg8K--s
+Install Swagger UI Documentation for Your PHP RESTful API, Part 3 - #30: https://www.youtube.com/watch?v=JnjlQBWvDAE
