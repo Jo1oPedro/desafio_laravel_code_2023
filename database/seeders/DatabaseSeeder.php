@@ -31,6 +31,27 @@ class DatabaseSeeder extends Seeder
         Admin::factory(10)->create();
         $this->createPetUserRegister();
         $this->createPetOwnerRegister();
+        Address::factory(1)->create();
+        PhoneNumber::factory(1)->create();
+
+        $person_id = Person::create([
+                'name' => 'cascata',
+                'email' => 'a@a.com',
+                'birthdate' => fake()->date,
+                'person_specialization' => 'users',
+                'address_id' => Address::latest()->first()->id,
+                'phone_number_id' => PhoneNumber::latest()->first()->id
+        ])->id;
+
+        $user_id = User::create([
+                'people_id' => $person_id,
+                'user_specialization' => 'admins',
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'
+        ])->id;
+
+        Admin::create([
+            'user_id' => $user_id
+        ]);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
