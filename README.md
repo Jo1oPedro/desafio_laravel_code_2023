@@ -26,7 +26,24 @@ Para executar o projeto você deve seguir os seguintes passos:
 - execute o comando: ```npm run build```
 - Para gerar a documentação do swagger execute o comando: ```php artisan swagger```
 - Para acessar a documentação gerada pelo swagger acesse a url exibida pelo comando ```php artisan serv``` e adicione ```/api-documentation```
+
 ## Links importantes da documentação para esse projeto
+
+### Modelo lógico do banco de dados
+Link: <a href="https://prnt.sc/l7l6AvaCLJB5">
+    Link para o modelo lógico do banco de dados
+</a>
+
+### Postman
+Link: <a href="https://www.postman.com/cascata/workspace/public-apis/collection/18990942-c9386768-8308-43c9-bfd8-220905166221?action=share&creator=18990942">
+    Link para a collection de rotas da api no postman.
+</a>
+
+### Documentação sobre teste de apis
+Link: <a href="https://laravel.com/docs/10.x/http-tests">
+Link para a collection de rotas da api no postman.
+</a>
+https://laravel.com/docs/10.x/http-tests
 
 ### Resources
 Link: <a href="https://laravel.com/docs/10.x/eloquent-resources">
