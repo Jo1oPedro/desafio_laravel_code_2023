@@ -124,9 +124,11 @@ class EmployeeController extends Controller
             $phone_number_id
         );
 
-        return ['employee' => new EmployeeResource(
-            $this->employeeService->create($employeDTO)
-        )];
+        return response()->json([
+            'employee' => new EmployeeResource(
+                $this->employeeService->create($employeDTO)
+            ),
+        ], 201);
     }
 
     /**
